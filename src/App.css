@@ -1,0 +1,15 @@
+/* :root {
+  --main-color: magenta;
+}
+
+h1 {
+  color: var(--main-color);
+}
+
+.triangle {
+  border-bottom: 100px solid transparent;
+  border-top: 100px solid red;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  width: 0;
+} */

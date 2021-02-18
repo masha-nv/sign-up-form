@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +12,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import Hidden from "@material-ui/core/Hidden";
+import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import {
   Input,
@@ -20,57 +22,46 @@ import {
   InputLabel,
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import styles from "./Styles/NavbarStyles";
 
-function Navbar() {
-  const { root, menuButton, title, grow, search } = useStyles();
-
+function Navbar({ classes }) {
   return (
-    <div className={root}>
-      <AppBar position="static">
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.grow}>
         <Toolbar>
           <IconButton
             edge="start"
-            className={menuButton}
+            className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <span>🇪🇸</span>
           </IconButton>
           <Switch />
-          <Typography variant="h6" className={title} color="inherit">
+
+          <Typography variant="h6" className={classes.title} color="inherit">
             App Title
           </Typography>
-          <Hidden smDown>
-            <TextField
-              autoComplete="off"
-              label="search"
-              id="search"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Hidden>
+
+          <TextField
+            className={classes.search}
+            autoComplete="off"
+            label="search"
+            id="search"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
