@@ -16,17 +16,19 @@ export default (theme) => ({
   },
   wrapper: {
     width: "100%",
+    // height: "100vh",
     display: "flex",
     justifyContent: "center",
-    marginTop: "100px",
     "& form": {
       padding: "2rem 0",
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
     },
     "& button": {
       marginTop: "1rem",
       padding: "1rem",
+      width: 204.8,
     },
   },
   root: {
@@ -38,9 +40,10 @@ export default (theme) => ({
     },
     display: "flex",
     justifyContent: "center",
+    marginTop: "90px",
   },
   formControl: {
-    minWidth: 120,
+    minWidth: 204.8,
     margin: theme.spacing(1),
   },
 });
