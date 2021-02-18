@@ -46,13 +46,13 @@ function Navbar({ classes }) {
           <TextField
             className={classes.search}
             autoComplete="off"
-            label="search"
+            label="Search..."
             id="search"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton>
-                    <SearchIcon />
+                    <SearchIcon className={classes.icon} />
                   </IconButton>
                 </InputAdornment>
               ),

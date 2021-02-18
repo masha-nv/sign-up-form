@@ -15,6 +15,7 @@ export default (theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.3),
     },
     "& label": {
+      color: fade(theme.palette.common.white, 0.8),
       paddingLeft: "10px",
       lineHeight: "20px",
     },
@@ -22,6 +23,9 @@ export default (theme) => ({
       paddingLeft: "10px",
       lineHeight: "20px",
     },
+  },
+  icon: {
+    color: theme.palette.common.white,
   },
   title: {
     display: "none",
