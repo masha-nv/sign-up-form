@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Paper,
   TextField,
@@ -16,14 +16,17 @@ import Button from "@material-ui/core/Button";
 
 import styles from "./Styles/FormStyles";
 import { withStyles } from "@material-ui/core/styles";
+import { LanguageContext } from "./contexts/LanguageContext";
 
 const Form = ({ classes }) => {
-  const languages = ["English", "Spanish", "French"];
-  const [language, setLanguage] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+
+  const { languages, language, changeLanguage, textData } = useContext(
+    LanguageContext
+  );
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,9 +34,7 @@ const Form = ({ classes }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChange = (e) => {
-    setLanguage(e.target.value);
-  };
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -44,11 +45,11 @@ const Form = ({ classes }) => {
     e.preventDefault();
     setUsername("");
     setPassword("");
-    setLanguage("");
   };
   const handleRememberMe = (e) => {
     setRememberMe(e.target.checked ? true : false);
   };
+
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.root} elevation={14} square={true}>
@@ -57,7 +58,7 @@ const Form = ({ classes }) => {
             <LockIcon fontSize="large" />
           </Avatar>
           <Typography className={classes.title} variant="h5">
-            Sign Up
+            {textData.signup}
           </Typography>
           <FormControl className={classes.formControl}>
             <InputLabel id="language" id="demo-controlled-open-select-label">
@@ -66,17 +67,17 @@ const Form = ({ classes }) => {
             <Select
               labelId="language"
               value={language}
-              onChange={handleChange}
+              onChange={(e) => changeLanguage(e.target.value)}
               onOpen={handleOpen}
               open={isOpen}
               onClose={handleClose}
             >
-              <MenuItem value="">
+              <MenuItem value={language}>
                 <em>None</em>
               </MenuItem>
               {languages.map((language) => (
-                <MenuItem key={language} value={language}>
-                  {language}
+                <MenuItem key={language.name} value={language.name}>
+                  {language.name}
                 </MenuItem>
               ))}
             </Select>
@@ -84,14 +85,14 @@ const Form = ({ classes }) => {
           <TextField
             onChange={handleUsernameChange}
             id="username"
-            label="Username"
+            label={textData.username}
             autoComplete="off"
             helperText="enter your username"
             value={username}
           />
           <TextField
             helperText="enter your password"
-            label="Password"
+            label={textData.password}
             autoComplete="off"
             id="password"
             onChange={handlePasswordChange}
@@ -101,12 +102,10 @@ const Form = ({ classes }) => {
             control={
               <Checkbox checked={rememberMe} onChange={handleRememberMe} />
             }
-            label="Remember Me"
+            label={textData.remember}
           />
 
-          <Button type="submit" variant="contained" color="primary">
-            Sign Up
-          </Button>
+          <Button type="submit" variant="contained" color="primary"></Button>
         </form>
       </Paper>
     </div>

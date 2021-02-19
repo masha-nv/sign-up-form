@@ -15,7 +15,7 @@ export default (theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.3),
     },
     "& label": {
-      color: fade(theme.palette.common.white, 0.8),
+      // color: fade(theme.palette.common.white, 0.8),
       paddingLeft: "10px",
       lineHeight: "20px",
     },

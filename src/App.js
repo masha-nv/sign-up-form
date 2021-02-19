@@ -2,15 +2,18 @@ import React from "react";
 import Form from "./Form";
 import Navbar from "./Navbar";
 import PageContents from "./pageContents";
-import { ThemeProvider, ThemeContext } from "./contexts/ThemeContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
-function App(props) {
+function App() {
   return (
     <ThemeProvider>
-      <PageContents>
-        <Navbar />
-        <Form />
-      </PageContents>
+      <LanguageProvider>
+        <PageContents>
+          <Navbar />
+          <Form />
+        </PageContents>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

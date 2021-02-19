@@ -1,5 +1,4 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,6 +13,8 @@ import TextField from "@material-ui/core/TextField";
 import Hidden from "@material-ui/core/Hidden";
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { ThemeContext } from "./contexts/ThemeContext";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import {
   Input,
   FormControl,
@@ -23,11 +24,20 @@ import {
 } from "@material-ui/core";
 
 import styles from "./Styles/NavbarStyles";
+import { LanguageContext } from "./contexts/LanguageContext";
 
 function Navbar({ classes }) {
+  const { isDarkMode, switchMode } = useContext(ThemeContext);
+  const { languages, language, changeLanguage, textData } = useContext(
+    LanguageContext
+  );
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.grow}>
+      <AppBar
+        position="static"
+        className={classes.grow}
+        color={isDarkMode ? "default" : "primary"}
+      >
         <Toolbar>
           <IconButton
             edge="start"
@@ -35,9 +45,9 @@ function Navbar({ classes }) {
             color="inherit"
             aria-label="menu"
           >
-            <span>🇪🇸</span>
+            <span>{textData.emoji}</span>
           </IconButton>
-          <Switch />
+          <Switch onChange={switchMode} />
 
           <Typography variant="h6" className={classes.title} color="inherit">
             App Title
@@ -46,7 +56,7 @@ function Navbar({ classes }) {
           <TextField
             className={classes.search}
             autoComplete="off"
-            label="Search..."
+            label={textData.search + "..."}
             id="search"
             InputProps={{
               endAdornment: (
